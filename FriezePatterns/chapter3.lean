@@ -49,16 +49,13 @@ lemma arithFrPatImageFinite (n : ℕ) (f : ℕ × ℕ → ℚ) [arith_fp f n] : 
   exact imageFinite ℚ f n
 
 variable (s : Set (ℕ × ℕ)) -- using this definition apparently we can apply Set.Finite.exists_maximal_wrt', with the tradeoff of more complicated definitions.
+-- Step 1: define u_n(f) = max (f (i,m), i ∈ ℕ , m ∈ ℕ )
 lemma unFDefined (n : ℕ) (f : ℕ × ℕ → ℚ) [arith_fp f n] : ∃ a ∈ s, ∀ a' ∈ s, f a ≤ f a' → f a = f a' := by
   refine Set.Finite.exists_maximal_wrt' f s ?h ?hs
   have h : (f '' s).Finite := by sorry
   exact h
   have hs : s.Nonempty := by sorry
   exact hs
-
-
-  --Set.Finite.exists_maximal_wrt' f V h₂ h₁
-
--- Step 1: define u_n(f) = max (f (i,m), i ∈ ℕ , m ∈ ℕ )
+-- Step 2: define u_n = max (u_n(f), f ∈ arithFriezePatSet n)
 
 theorem mainTheorem : 2^3 ≤ 8 := by linarith
